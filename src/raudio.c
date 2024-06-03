@@ -67,7 +67,8 @@
 *
 *     3. This notice may not be removed or altered from any source distribution.
 *
-**********************************************************************************************/
+**********************************************************************************************//*
+
 
 #if defined(RAUDIO_STANDALONE)
     #include "raudio.h"
@@ -1948,7 +1949,8 @@ void UpdateMusicStream(Music music)
             {
                 unsigned int frameCountRead = qoaplay_decode((qoaplay_desc *)music.ctxData, (float *)AUDIO.System.pcmBuffer, framesToStream);
                 frameCountReadTotal += frameCountRead;
-                /*
+                */
+/*
                 while (true)
                 {
                     int frameCountRead = (int)qoaplay_decode((qoaplay_desc *)music.ctxData, (float *)((char *)AUDIO.System.pcmBuffer + frameCountReadTotal*frameSize),  frameCountStillNeeded);
@@ -1957,7 +1959,8 @@ void UpdateMusicStream(Music music)
                     if (frameCountStillNeeded == 0) break;
                     else qoaplay_rewind((qoaplay_desc *)music.ctxData);
                 }
-                */
+                *//*
+
             } break;
         #endif
         #if defined(SUPPORT_FILEFORMAT_FLAC)
@@ -2455,19 +2458,29 @@ static ma_uint32 ReadAudioBufferFramesInMixingFormat(AudioBuffer *audioBuffer, f
 
         float *runningFramesOut = framesOut + (totalOutputFramesProcessed*audioBuffer->converter.channelsOut);
 
-        /* At this point we can convert the data to our mixing format. */
-        ma_uint64 inputFramesProcessedThisIteration = ReadAudioBufferFramesInInternalFormat(audioBuffer, inputBuffer, (ma_uint32)inputFramesToProcessThisIteration);    /* Safe cast. */
+        */
+/* At this point we can convert the data to our mixing format. *//*
+
+        ma_uint64 inputFramesProcessedThisIteration = ReadAudioBufferFramesInInternalFormat(audioBuffer, inputBuffer, (ma_uint32)inputFramesToProcessThisIteration);    */
+/* Safe cast. *//*
+
         ma_uint64 outputFramesProcessedThisIteration = outputFramesToProcessThisIteration;
         ma_data_converter_process_pcm_frames(&audioBuffer->converter, inputBuffer, &inputFramesProcessedThisIteration, runningFramesOut, &outputFramesProcessedThisIteration);
 
-        totalOutputFramesProcessed += (ma_uint32)outputFramesProcessedThisIteration; /* Safe cast. */
+        totalOutputFramesProcessed += (ma_uint32)outputFramesProcessedThisIteration; */
+/* Safe cast. *//*
+
 
         if (inputFramesProcessedThisIteration < inputFramesToProcessThisIteration)
         {
-            break;  /* Ran out of input data. */
+            break;  */
+/* Ran out of input data. *//*
+
         }
 
-        /* This should never be hit, but will add it here for safety. Ensures we get out of the loop when no input nor output frames are processed. */
+        */
+/* This should never be hit, but will add it here for safety. Ensures we get out of the loop when no input nor output frames are processed. *//*
+
         if (inputFramesProcessedThisIteration == 0 && outputFramesProcessedThisIteration == 0)
         {
             break;
@@ -2873,3 +2886,4 @@ static bool SaveFileText(const char *fileName, char *text)
 #undef AudioBuffer
 
 #endif      // SUPPORT_MODULE_RAUDIO
+*/
